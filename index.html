@@ -4,11 +4,105 @@
 
 
 <p>test...test...test</p>
+<p id="tz"></p>
 
-<?php
-$txt = "PHP";
-echo "I love $txt!";
-?>
+<button id="calculate-btn">Calculate New Mexica Year</button>
+
+
+
+<script>
+
+function calculateNewMexicaYear() {
+  const currentDate = new Date();
+  const refY = currentDate.getFullYear();
+  const refM = currentDate.getMonth();
+  const refD = currentDate.getDate();
+  let refH = currentDate.getHours();
+
+  let year = (refY - 2) % 4;
+  let year13 = (refY - 11) % 13;
+  let dmod = 69 - Math.floor((refY - 24) / 130) - Math.floor(refY / 400) + Math.floor(refY / 100);
+
+  let yd = 0;
+  if (refD > dmod || (year != 1 && year != 0 && refD == dmod)) {
+    if (year == 0 || year == 1) {
+      dmod++;
+    }
+    yd = refD - dmod;
+  } else {
+    if (year == 1 || year == 2 || year == 3) {
+      dmod--;
+    }
+    yd = refD + 364 - dmod;
+    year = year === 0 ? 3 : year - 1;
+    year13 = year13 === 0 ? 12 : year13 - 1;
+  }
+
+  let yearHour = 6 * ((year + 3) % 4);
+  if (refH < yearHour) {
+    if (yd === 0) {
+      yd = year === 1 ? 365 : 364;
+      year = year === 0 ? 3 : year - 1;
+      year13 = year13 === 0 ? 12 : year13 - 1;
+      yearHour = yearHour === 0 ? 18 : yearHour - 6;
+    } else {
+      yd--;
+    }
+  }
+
+  refH -= yearHour;
+  if (refH < 0) {
+    refH += 24;
+  }
+
+  const month = Math.floor(yd / 20);
+  const day = yd % 20 + 1;
+  const day9 = yd % 9 + 1;
+  const day13 = ((9 * year13) % 13 + yd) % 13 + 1;
+  const trecena = (day - day13 + 19) % 20 + 1;
+  const quarterHour = Math.floor((refM * 60 + refH) / 15);
+  const hour = Math.floor(quarterHour / 4);
+  const quarter = quarterHour % 4 + 1;
+
+  let isNemo = false;
+  if (month === 18) {
+    isNemo = true;
+  } else if (month === 17 && day === 19 && (refY - 11) % 52 === 21) {
+    isNemo = true;
+    day++;
+  }
+
+  if (isNemo) {
+    const nemoDay = (yd - 360) % 260 + 1;
+    year = Math.floor((nemoDay - 1) / 73);
+    year13 = (nemoDay - 1) % 13 + 1;
+    const nemoTrecena = (nemoDay - 1) % 20 + 1;
+    day = (nemoTrecena - (day13 - 1) + 19) % 20 + 1;
+    day9 = (nemoTrecena - (day13 - 1) + 8) % 9 + 1;
+    day13 =  (day13 - 1) % 13 + 1;
+trecena = (day - day13 + 19) % 20 + 1;
+}
+
+const newMexicaYear = {
+year: year + 1,
+year13: year13,
+month: month + 1,
+day: day,
+day9: day9,
+day13: day13,
+trecena: trecena,
+quarter: quarter,
+hour: hour,
+};
+
+console.log(newMexicaYear);
+}
+
+const calculateBtn = document.getElementById("calculate-btn");
+calculateBtn.addEventListener("click", calculateNewMexicaYear);
+
+
+</script>
 
 </body>
 </html>
