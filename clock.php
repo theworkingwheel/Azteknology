@@ -42,6 +42,8 @@ $expt	= 0;
 			$curtime = mktime($expt[4],$expt[5],0,$expt[2],$expt[3],2001);
 	}
 	
+	////////////////////////////////
+
 	$refd	= date('z', $curtime);	// range 0-365
 	$refh	= date('G', $curtime);	// range 0-23
 	$refm	= date('i', $curtime);	// range 0-59
@@ -74,6 +76,8 @@ $expt	= 0;
 		$yr		=  $yr   == 0  ?   3  :  $yr - 1;
 		$yr13	=  $yr13 == 0  ?  12  :  $yr13 - 1;
 	}
+
+	//////////////////////////////////////////////
 	
 	$yrhr= 6 * (($yr + 3) % 4);		// Starting Hour of Day {0,6,12,18}
 	if ($refh < $yrhr) {
@@ -92,13 +96,17 @@ $expt	= 0;
 		$refh += 24;
 	}
 	
+///////////////////////////////////////////
+
 	$mnth	= floor($yd / 20);					// Month 0-18 (18==isnemo)
 	$d		= $yd % 20;							// Day 0-19
 	$d9		= $yd % 9;							// 9 Day Cycle 0-8
 	$d13s	= (9 * $yr13) % 13;
 	$d13	= ($d13s + $yd) % 13;				// 13 Day Cycle 0-12
 	$th		= $d - $d13;						// Trecena 0-19
+	
 	if ($th < 0) $th += 20;
+	
 	$qhr	= floor(($refm + $refh * 60) / 18);	// 1/4 Hour 0-79
 	$hr		= floor($qhr / 4);					// Hour 0-19
 	$qhrs	= $qhr % 20 + 1;					// 1/4 Hour Symbol
@@ -148,6 +156,8 @@ $expt	= 0;
 	$d13++;
 	$th++;
 		
+////////////////////////////////////
+
 	/*for ($i = 11 ; $i <= 3000 ; $i+=4)
 		if ( (((5 * ($i - 12)) % 13) + 5) == 13 )
 			print_r($i.", ");*/
@@ -169,26 +179,47 @@ $expt	= 0;
 	/*switch ($lang) {
 		case 'english':*/
 			$desc_day = Array("Day",
+
 			"The Crocodile: Beginning of evolution of all beings. The Initiator, number One even with no number Two.",
+
 			"The Wind: Our Breath of life and the medium of all living beings; it carries the sounds and symbolizes creativity and harmony.",
+
 			"The House: Our home, refuge and house of thoughts; a safe place for reflection and regrouping for the comprehension of all living beings.",
+
 			"The Lizard: Our maternal womb. Representing the Mother Earth associated with fertility, nurturing and the capability of regeneration.",
+
 			"The Serpent: Our knowledge and wisdom. Represents energy and fertility, and of the senses it represents the touch, and is associated with the twins and the earth.",
+
 			"The Skull: Our silence and transformation. Represents the reevaluation of life and death and of things done and things left to be done. Don't Hesitate!",
+
 			"The Deer: Symbolizes our agility, instinct, intuition, perception and sensibility, as well as all the Fauna. The deer is activated by the energy of the Sun and is a messenger of love and peace from the grandfathers.",
+
 			"The Rabbit: Our multiplicity and taste perception. Represents the fertility of the earth and all living beings by the lunar influence. They are very independent, yet are always giving to and providing for others.",
+
 			"The Water: Our growth. It is a vital element and it possibilizes life and purifies it. It adopts the shape of the container that holds it. It is the duality of the fire and has constant creating activities and is penetrating and perseverant.",
+
 			"The Dog: Our loyalty and fidelity. He is a best friend and a guide with the capability to transform himself and all that surrounds him. He loves to travel, but will not forget where he comes from and always returns to his place of origin.",
+
 			"The Monkey: Our grasping, comprehension and agility. The monkey exhibits mobility to all directions without regard to neither heights nor distances. He also symbolizes recreation and happiness, and it is also the symbol of the dance.",
+
 			"The Herb: Our umbilical cord and the constant regeneration of nature. It also represents all Flora, these are all medicinal, if we use them wisely.",
+
 			"The Reed, bamboo: Our internal self. Conduit of heat and energy. Represents intelligence, observation, analysis, memory and the sub-conscious. Through the subconscious he can be all places and see all things, even with his eyes bandaged. Akatl can unite the collective intentions to make even nature fulfill its mission.",
+
 			"The Jaguar: Our listening. An audacious and tenacious guide and a champion of the just cause is a guardian of the house of creating energy, Teokalli",
+
 			"<strong>The Eagle:</strong> Our vision; a solar symbol. This is the physical and spiritual renovation, purification and cleansing of ourselves and our environment. Here is the presence of freedom and liberty and a guardian of the house of creating energy, Teokalli.",
+
 			"The Condor: Our youth and a moment of reflection and remedy. Reflect to find the teachings and remedy the faults. Find life where there is, apparently, no life.",
+			
 			"Movement: Our lips and the movement of our heart. The essence of life and of existence, directly related to activity and creativity and the constant movements of the universe.",
+
 			"The Flint: Our tongue; the word, profound, pointed and sharp. This is a profound method of study and analysis to truly comprehend things and then produce enduring concepts.",
+
 			"The Rain: Our teardrops, peaceful and furious at its time. Sensitivity, the concept of Tlalok, Tlal = earth, Ok = a drink = What the earth drinks, to give us life.",
+			
 			"The Flower: Our completion, maturity, artistic and spiritual creativity, ready to produce fruit and seed. It represents artistic and scientific creativity.");
+
 //$daycomp = Array("Iluikapotzintli", "Xochipilli as Tonakatekutli and Tonakaziuatl", "E'ekatl Ketzalkoatl", "Tepeyolotli", "Ueuekoyotl", "Chalchiuitlikue", "Meztli Teziztekatl", "Tlalokantekutli", "Mayaual", "Xiutekutli", "Miktlantekutli", "Xochipilli as Zenteotl", "Patekatl", "Yayauki Tezkatlipoka Ixkimilli", "Tlazoteotl", "Xipe Totek", "Itzpapalotl", "Xolotekutli Ketzalkoatl", "Chalchiuitotolin", "Tonatiu Tonalteotl", "Xochiketzalli");
 			$desc_daycomp = Array("Day Companion",
 			"The Flower Child that guides photosynthesis through the Male Energies and Female Energies of the Sun Rays to give life.",
